@@ -1,2 +1,2 @@
 # matlab-util-tools
-Matlab custom functions that should really be built-in
+useful Matlab functions not available in the standard library
