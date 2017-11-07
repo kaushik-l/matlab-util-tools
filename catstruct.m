@@ -136,11 +136,15 @@ else
     % [UFN,ind] = unique(FN) ; % earlier ML versions, like 6.5
     
     if numel(UFN) ~= numel(FN),
-        warning('catstruct:DuplicatesFound','Fieldnames are not unique between structures.') ;
+%         warning('catstruct:DuplicatesFound','Fieldnames are not unique between structures.') ;
         sorted = 1 ;
     end
     
     if sorted,
+        %% added by KL on 10/06/2017 - resolves conflict by merging contents of identically named fields instead of overwriting
+        duplicate_ind = setdiff(1:size(FN, 1), ind);
+        VAL{ind(duplicate_ind)} = catstruct(VAL{duplicate_ind},VAL{ind(duplicate_ind)});
+        %%
         VAL = VAL(ind,:) ;
         FN = FN(ind,:) ;
     end
