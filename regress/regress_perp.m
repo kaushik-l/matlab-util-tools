@@ -37,6 +37,10 @@ if option~=1 & option~=2
     error('option input is not recognized');
 end
 
+% remove nans
+nanxy = isnan(x)|isnan(y);
+x(nanxy) = []; y(nanxy) = [];
+
 %estimating slope and intercept via nonlinear least square fitting
 %the fitting minimizes perpendicular offset (point2line distance)
 if option==1
